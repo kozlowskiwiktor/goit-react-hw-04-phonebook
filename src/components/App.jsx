@@ -19,10 +19,11 @@ export const App = () => {
 
   const addContactToPhoneBook = newContact => {
     const isExists = contacts.find(
-      contact => contact.name.toLowerCase() === newContact.name.toLowerCase()
+      contact =>
+        contact.firstName.toLowerCase() === newContact.firstName.toLowerCase()
     );
     if (isExists) {
-      return alert(`${isExists.name} is already in contacts.`);
+      return alert(`${isExists.firstName} is already in contacts.`);
     }
     const updatedContacts = [...contacts, newContact];
 
@@ -34,10 +35,11 @@ export const App = () => {
   const getContacts = (contacts, filter) => {
     const normalizeName = filter.toLowerCase();
 
+    console.log(contacts);
     console.log(normalizeName);
 
     return contacts.filter(contact =>
-      contact.name.toLowerCase().includes(normalizeName)
+      contact.firstName.toLowerCase().includes(normalizeName)
     );
   };
 
