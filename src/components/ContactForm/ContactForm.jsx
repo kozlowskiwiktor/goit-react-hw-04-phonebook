@@ -1,5 +1,6 @@
 import propTypes from 'prop-types';
 import { nanoid } from 'nanoid';
+import css from 'container.module.css';
 
 import { useState, useRef } from 'react';
 
@@ -39,7 +40,7 @@ const ContactForm = ({ onSubmit }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} className={css.container}>
       <label>Name</label>
       <input
         type="text"

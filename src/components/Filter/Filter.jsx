@@ -1,8 +1,9 @@
 import propTypes from 'prop-types';
+import css from 'container.module.css';
 
 const Filter = ({ value, onChangeFilter }) => {
   return (
-    <form>
+    <form className={css.container}>
       <label>Find contact</label>
       <input
         type="text"

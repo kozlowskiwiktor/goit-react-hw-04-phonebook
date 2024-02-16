@@ -1,8 +1,9 @@
 import propTypes from 'prop-types';
+import css from 'container.module.css';
 
 const ContactList = ({ contacts, onDeleteContact }) => {
   return (
-    <div>
+    <div className={css.container}>
       {contacts.map(contact => {
         return (
           <p key={contact.id}>
