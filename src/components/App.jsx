@@ -6,16 +6,8 @@ import Filter from './Filter/Filter';
 import getContactsLocalStorage from './localStorage';
 
 export const App = () => {
-  const [filter, setFilter] = useState(getContactsLocalStorage());
-  const [contacts, setContacts] = useState([]);
-
-  // useEffect(() => {
-  //   const savedContacts = localStorage.getItem('contacts');
-  //   if (savedContacts) {
-  //     const parsedContacts = JSON.parse(savedContacts);
-  //     setContacts(parsedContacts);
-  //   }
-  // }, []);
+  const [filter, setFilter] = useState('');
+  const [contacts, setContacts] = useState(getContactsLocalStorage());
 
   useEffect(() => {
     localStorage.setItem('contacts', JSON.stringify(contacts));
@@ -35,7 +27,7 @@ export const App = () => {
   };
 
   const getContacts = (contacts, filter) => {
-    const normalizeName = filter.toString().toLowerCase();
+    const normalizeName = filter.toLowerCase();
     return contacts.filter(contact =>
       contact.firstName.toLowerCase().includes(normalizeName)
     );
