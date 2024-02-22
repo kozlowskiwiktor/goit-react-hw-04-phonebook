@@ -3,19 +3,23 @@ import { useState, useEffect } from 'react';
 import ContactForm from './ContactForm/ContactForm';
 import ContactList from './ContactList/ContactList';
 import Filter from './Filter/Filter';
+import getContactsLocalStorage from './localStorage';
 
 export const App = () => {
-  const [filter, setFilter] = useState('');
+  const [filter, setFilter] = useState(getContactsLocalStorage());
   const [contacts, setContacts] = useState([]);
 
-  useEffect(() => {
-    const savedContacts = localStorage.getItem('contacts');
+  // useEffect(() => {
+  //   const savedContacts = localStorage.getItem('contacts');
+  //   if (savedContacts) {
+  //     const parsedContacts = JSON.parse(savedContacts);
+  //     setContacts(parsedContacts);
+  //   }
+  // }, []);
 
-    if (savedContacts) {
-      const parsedContacts = JSON.parse(savedContacts);
-      setContacts(parsedContacts);
-    }
-  }, []);
+  useEffect(() => {
+    localStorage.setItem('contacts', JSON.stringify(contacts));
+  }, [contacts]);
 
   const addContactToPhoneBook = newContact => {
     const isExists = contacts.find(
@@ -28,16 +32,10 @@ export const App = () => {
     const updatedContacts = [...contacts, newContact];
 
     setContacts(updatedContacts);
-
-    localStorage.setItem('contacts', JSON.stringify(updatedContacts));
   };
 
   const getContacts = (contacts, filter) => {
-    const normalizeName = filter.toLowerCase();
-
-    console.log(contacts);
-    console.log(normalizeName);
-
+    const normalizeName = filter.toString().toLowerCase();
     return contacts.filter(contact =>
       contact.firstName.toLowerCase().includes(normalizeName)
     );
@@ -50,8 +48,6 @@ export const App = () => {
   const deleteContact = id => {
     const updatedContacts = contacts.filter(contact => contact.id !== id);
     setContacts(updatedContacts);
-
-    localStorage.setItem('contacts', JSON.stringify(updatedContacts));
   };
 
   return (
